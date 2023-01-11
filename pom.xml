@@ -12,7 +12,7 @@
 	<artifactId>rest-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rest-api</name>
-	<description>Rest API for people management</description>
+	<description>Rest API for person management</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
