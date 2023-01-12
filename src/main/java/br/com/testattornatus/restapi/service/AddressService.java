@@ -2,6 +2,7 @@ package br.com.testattornatus.restapi.service;
 
 import br.com.testattornatus.restapi.dto.AddressDto;
 import br.com.testattornatus.restapi.model.Address;
+import br.com.testattornatus.restapi.model.Person;
 import br.com.testattornatus.restapi.repository.AddressRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,17 @@ public class AddressService {
     }
 
     public AddressDto update(Long id, AddressDto dto) {
-        Address addressUpdated = modelMapper.map(dto, Address.class);
-        addressUpdated.setId(id);
-        repository.save(addressUpdated);
-        return modelMapper.map(addressUpdated, AddressDto.class);
+
+        Address address = repository.findById(id).get();
+
+        if (dto.getStreet() != null) address.setStreet(dto.getStreet());
+        if (dto.getCep() != null) address.setCep(dto.getCep());
+        if (dto.getNumber() != null) address.setNumber(dto.getNumber());
+        if (dto.getCity() != null) address.setCity(dto.getCity());
+
+        address.setId(id);
+        repository.save(address);
+        return modelMapper.map(address, AddressDto.class);
     }
 
     public void delete(Long id) {

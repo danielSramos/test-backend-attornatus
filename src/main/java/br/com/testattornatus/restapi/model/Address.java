@@ -21,7 +21,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String street;
-    private String CEP;
+    private String cep;
     private Long number;
     private String city;
     @ManyToOne(fetch = FetchType.LAZY)

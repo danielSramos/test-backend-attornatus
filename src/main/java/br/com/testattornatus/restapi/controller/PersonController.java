@@ -1,5 +1,6 @@
 package br.com.testattornatus.restapi.controller;
 
+import br.com.testattornatus.restapi.dto.CreatePersonDto;
 import br.com.testattornatus.restapi.dto.PersonDto;
 import br.com.testattornatus.restapi.service.PersonService;
 import com.sun.istack.NotNull;
@@ -32,16 +33,16 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<PersonDto> create(@RequestBody PersonDto dto, UriComponentsBuilder uriBuilder) {
-        PersonDto person = personService.create(dto);
+    public ResponseEntity<CreatePersonDto> create(@RequestBody CreatePersonDto dto, UriComponentsBuilder uriBuilder) {
+        CreatePersonDto person = personService.create(dto);
         URI uri = uriBuilder.path("/people/{id}").buildAndExpand(person.getId()).toUri();
         return ResponseEntity.created(uri).body(person);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonDto> update(@PathVariable @NotNull Long id , @RequestBody PersonDto dto) {
-        PersonDto personUpdate = personService.update(id, dto);
-        return ResponseEntity.ok(personUpdate);
+        PersonDto person = personService.update(id, dto);
+        return ResponseEntity.ok(person);
     }
 
     @DeleteMapping("/{id}")

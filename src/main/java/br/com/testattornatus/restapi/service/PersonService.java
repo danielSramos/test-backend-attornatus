@@ -1,5 +1,6 @@
 package br.com.testattornatus.restapi.service;
 
+import br.com.testattornatus.restapi.dto.CreatePersonDto;
 import br.com.testattornatus.restapi.dto.PersonDto;
 import br.com.testattornatus.restapi.model.Person;
 import br.com.testattornatus.restapi.repository.PersonRepository;
@@ -29,10 +30,10 @@ public class PersonService {
         return modelMapper.map(person, PersonDto.class);
     }
 
-    public PersonDto create(PersonDto dto) {
+    public CreatePersonDto create(CreatePersonDto dto) {
         Person person = modelMapper.map(dto, Person.class);
         repository.save(person);
-        return modelMapper.map(person, PersonDto.class);
+        return modelMapper.map(person, CreatePersonDto.class);
     }
 
     public PersonDto update(Long id, PersonDto dto) {

@@ -24,6 +24,6 @@ public class Person {
     private String name;
     private String birthDate;
     @OneToMany(mappedBy = "person")
-    private List<Address> adrress;
+    private List<Address> address;
 
 }

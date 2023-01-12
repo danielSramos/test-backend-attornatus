@@ -1,6 +1,7 @@
 package br.com.testattornatus.restapi.dto;
 
 import br.com.testattornatus.restapi.model.Person;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +11,10 @@ public class AddressDto {
 
     private Long id;
     private String street;
-    private String CEP;
+    private String cep;
     private Long number;
     private String city;
-    private Person person;
+    @NotNull
+    private Long personId;
 
 }
