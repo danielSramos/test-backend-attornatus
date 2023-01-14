@@ -1,7 +1,5 @@
 package br.com.testattornatus.restapi.dto;
 
-import br.com.testattornatus.restapi.model.Person;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -12,10 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AddressService {
@@ -27,7 +24,7 @@ public class AddressService {
     private ModelMapper modelMapper;
 
     public Page<AddressDto> getAll(Pageable pagination) {
-         return repository.findAll(pagination).map(p -> modelMapper.map(p, AddressDto.class));
+        return repository.findAll(pagination).map(p -> modelMapper.map(p, AddressDto.class));
     }
 
     public AddressDto getById(Long id) {
@@ -38,7 +35,8 @@ public class AddressService {
     public List<AddressDto> getByPersonId(Long id) {
 
         List<Address> address = repository.findAddressByPersonId(id);
-        List<AddressDto> addressDto = modelMapper.map(address, new TypeToken<List<AddressDto>>() {}.getType());
+        List<AddressDto> addressDto = modelMapper.map(address, new TypeToken<List<AddressDto>>() {
+        }.getType());
         return addressDto;
     }
 
@@ -56,6 +54,14 @@ public class AddressService {
         if (dto.getCep() != null) address.setCep(dto.getCep());
         if (dto.getNumber() != null) address.setNumber(dto.getNumber());
         if (dto.getCity() != null) address.setCity(dto.getCity());
+
+        List<Address> addressByPersonId = repository.findAddressByPersonId(address.getPerson().getId());
+        addressByPersonId.forEach(a -> {
+            if (a.getMainAddress() == true) {
+                a.setMainAddress(false);
+            }
+        });
+
         if (dto.getMainAddress() != null) address.setMainAddress(dto.getMainAddress());
 
         address.setId(id);

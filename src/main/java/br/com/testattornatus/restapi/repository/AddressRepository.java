@@ -6,8 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AddressRepository extends JpaRepository <Address, Long> {
     List<Address> findAddressByPersonId(Long id);
+
+    @Query(value = "SELECT A.* FROM ADDRESS A JOIN PEOPLE P ON A.MAIN_ADDRESS = TRUE AND P.ID = A.PERSON_ID WHERE PERSON_ID = ?;",
+    nativeQuery = true)
+    Address findMainAddressByPersonId(@Param("id") Long id);
+
 }

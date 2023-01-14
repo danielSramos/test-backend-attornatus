@@ -1,6 +1,5 @@
 package br.com.testattornatus.restapi.dto;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 

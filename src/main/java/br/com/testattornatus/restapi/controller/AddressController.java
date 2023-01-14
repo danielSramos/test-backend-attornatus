@@ -27,7 +27,7 @@ public class AddressController {
     ModelMapper modelMapper;
 
     @GetMapping
-    public Page<AddressDto> getAll(@PageableDefault(size = 5)Pageable pagination) {
+    public Page<AddressDto> getAll(@PageableDefault(size = 10)Pageable pagination) {
         return addressService.getAll(pagination);
     }
 
