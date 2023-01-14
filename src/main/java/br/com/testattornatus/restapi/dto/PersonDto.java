@@ -13,6 +13,5 @@ public class PersonDto {
     @NotNull
     private String name;
     private String birthDate;
-    private Address address;
 
 }

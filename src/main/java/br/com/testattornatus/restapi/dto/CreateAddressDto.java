@@ -1,13 +1,12 @@
 package br.com.testattornatus.restapi.dto;
 
-import br.com.testattornatus.restapi.model.Person;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AddressDto {
+public class CreateAddressDto {
 
     private Long id;
     private String street;
@@ -16,5 +15,6 @@ public class AddressDto {
     private String city;
     private Boolean mainAddress;
     private Long personId;
+
 
 }

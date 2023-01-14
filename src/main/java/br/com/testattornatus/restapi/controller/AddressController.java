@@ -1,7 +1,7 @@
 package br.com.testattornatus.restapi.controller;
 
 import br.com.testattornatus.restapi.dto.AddressDto;
-import br.com.testattornatus.restapi.model.Address;
+import br.com.testattornatus.restapi.dto.CreateAddressDto;
 import br.com.testattornatus.restapi.service.AddressService;
 import com.sun.istack.NotNull;
 import org.modelmapper.ModelMapper;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/address")
@@ -36,9 +37,15 @@ public class AddressController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/person/{id}")
+    public ResponseEntity<List<AddressDto>> getByPersonId(@PathVariable @NotNull Long id) {
+        List<AddressDto> dto = addressService.getByPersonId(id);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
-    public ResponseEntity<AddressDto> create(@RequestBody AddressDto dto, UriComponentsBuilder uriBuilder) {
-        AddressDto address = addressService.create(dto);
+    public ResponseEntity<CreateAddressDto> create(@RequestBody CreateAddressDto dto, UriComponentsBuilder uriBuilder) {
+        CreateAddressDto address = addressService.create(dto);
         URI uri = uriBuilder.path("/address/{id}").buildAndExpand(address.getId()).toUri();
         return ResponseEntity.created(uri).body(address);
     }

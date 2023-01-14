@@ -1,13 +1,13 @@
 package br.com.testattornatus.restapi.model;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -24,8 +24,11 @@ public class Address {
     private String cep;
     private Long number;
     private String city;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Boolean mainAddress;
+
+    @ManyToOne()
     @JoinColumn(name = "person_id")
+    @JsonBackReference
     private Person person;
 
 }

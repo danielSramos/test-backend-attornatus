@@ -1,5 +1,7 @@
 package br.com.testattornatus.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +25,9 @@ public class Person {
     @NotNull
     private String name;
     private String birthDate;
-    @OneToMany(mappedBy = "person")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @JsonManagedReference
     private List<Address> address;
 
 }
