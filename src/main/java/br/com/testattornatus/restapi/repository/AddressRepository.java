@@ -13,5 +13,4 @@ public interface AddressRepository extends JpaRepository <Address, Long> {
     @Query(value = "SELECT A.* FROM ADDRESS A JOIN PEOPLE P ON A.MAIN_ADDRESS = TRUE AND P.ID = A.PERSON_ID WHERE PERSON_ID = ?;",
     nativeQuery = true)
     Address findMainAddressByPersonId(@Param("id") Long id);
-
 }
